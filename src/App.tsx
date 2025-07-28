@@ -8,12 +8,12 @@ import Footer from './components/Footer';
 const Profile = () => <div className="p-4">Profile Page</div>;
 const AppWrapper: React.FC = () => {
   const location = useLocation();
-  const isLoginPage = location.pathname === '/login';
+  const isLoginPage = location.pathname === '/';
   return (
     <>
       <Navbar />
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/appointments" element={<Appointment />} />
         <Route path="/profile" element={<Profile />} />

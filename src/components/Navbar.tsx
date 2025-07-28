@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
   }, []);
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate('/');
   };
   const handleProfileClick = () => {
     setDropdownOpen(false);
@@ -36,7 +36,7 @@ const Navbar: React.FC = () => {
           <div className="flex items-center space-x-6">
             {!isAuthenticated ? (
               <>
-                <Link to="/login" className="hover:text-gray-200">
+                <Link to="/" className="hover:text-gray-200">
                   Login
                 </Link>
                 <Link to="/register" className="hover:text-gray-200">
