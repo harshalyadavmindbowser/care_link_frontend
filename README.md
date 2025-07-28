@@ -37,3 +37,5 @@ npm run build
 
 ### Must install Prettier(code formatter)
 ![alt text](image-2.png)
+
+## Take pull
