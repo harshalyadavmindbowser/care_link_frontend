@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Dashboard: React.FC = () => {
+const Register: React.FC = () => {
     return (
         <div className='p-6'>
-            <p>Dashboard Page</p>
+            <p>Register Page</p>
         </div>
     );
 };
 
-export default Dashboard;
+export default Register;
