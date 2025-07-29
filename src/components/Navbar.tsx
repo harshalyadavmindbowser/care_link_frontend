@@ -1,32 +1,40 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import React, { useState, useRef, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+
 const Navbar: React.FC = () => {
-    const { email } = useAuth();
-    const avatarLetter = email?.charAt(0).toUpperCase() || 'U'; 
-  const { isAuthenticated, logout } = useAuth();
+  const { user, isAuthenticated, logout } = useAuth();
+  const email = user?.email || "";
+  const avatarLetter = email.charAt(0).toUpperCase() || "U";
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setDropdownOpen(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate("/");
   };
+
   const handleProfileClick = () => {
     setDropdownOpen(false);
-    navigate('/profile');
+    navigate("/profile");
   };
+
   return (
-    // style = {{ color: "#38b6ff"}} 
     <nav className="w-full bg-blue-400 text-white shadow fixed top-0 left-0 z-50">
       <div className="ml-20 mr-20">
         <div className="flex justify-between items-center h-16">
@@ -85,4 +93,5 @@ const Navbar: React.FC = () => {
     </nav>
   );
 };
+
 export default Navbar;
