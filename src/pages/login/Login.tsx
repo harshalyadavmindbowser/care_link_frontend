@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-// import { useAuth } from '../context/AuthContext';
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -42,10 +41,16 @@ const Login: React.FC = () => {
   };
   return (
     <div
-      className="loginPageWrapper"
       style={{
         backgroundImage: "url('/loginbg.png')",
         backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        width: "100vw",
+        height: "100vh",
+        margin: 0,
+        padding: 0,
+        left: "100px"
       }}
     >
       <div className="container">
@@ -78,12 +83,6 @@ const Login: React.FC = () => {
             <button type="submit" className="loginButton">
               Login
             </button>
-            <p className="registerText">
-              New here?{" "}
-              <a href="/register" className="registrationLink">
-                Register
-              </a>
-            </p>
           </form>
         </div>
       </div>
