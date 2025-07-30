@@ -10,6 +10,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   outline?: boolean;
   rounded?: boolean;
 }
+
 const Button: React.FC<ButtonProps> = ({
   children,
   primary,
@@ -33,6 +34,7 @@ const Button: React.FC<ButtonProps> = ({
       'Only one of primary, secondary, success, warning, danger can be true'
     );
   }
+
   const classes = classNames(
     className,
     'flex items-center px-3 py-1.5 border',
@@ -51,6 +53,9 @@ const Button: React.FC<ButtonProps> = ({
       'text-red-500': outline && danger,
     }
   );
+
+
+
   return (
     <button {...rest} className={classes}>
       {children}
