@@ -28,7 +28,7 @@ export default function Dashboard() {
   const totalAppointments = user?.active_job_posts || 0;
 
   return (
-    <div className="p-6">
+    <div className="p-10 ml-60 mt-16 px-4ml-60 mr-60">
       <p className="text-2xl font-semibold mb-4">Dashboard</p>
       <p className="mb-6">Welcome back, Dr. </p>
 
@@ -41,10 +41,10 @@ export default function Dashboard() {
         ].map((item, index) => (
           <div
             key={index}
-            className="bg-cyan-600 text-white rounded-xl shadow-md p-6"
+            className="bg-white-100 text-black border rounded-xl shadow-md p-6"
           >
             <h3 className="text-lg font-semibold">{item.label}</h3>
-            <p className="text-3xl font-bold">{item.value}</p>
+            <p className="text-3xl font-semibold">{item.value}</p>
           </div>
         ))}
       </div>

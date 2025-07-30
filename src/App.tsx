@@ -5,7 +5,8 @@ import Appointment from './pages/appointment/Appointment';
 import Login from './pages/login/Login';
 import Dashboard from './pages/dashboard/Dashboard';
 import Footer from './components/Footer';
-import Register from './pages/register/Register';
+import PatientRegister from './pages/register/PatientRegister';
+import ProviderRegister from './pages/register/ProviderRegister';
 
 
 const Profile = () => <div className="p-4"> Profile Page </div>;
@@ -20,10 +21,11 @@ const AppWrapper: React.FC = () => {
     <>
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <main className='flex-grow mt-16 px-4'>
+      <main>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/patient" element={<PatientRegister />} />
+        <Route path="/provider" element={<ProviderRegister />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/appointments" element={<Appointment />} />
         <Route path="/profile" element={<Profile />} />

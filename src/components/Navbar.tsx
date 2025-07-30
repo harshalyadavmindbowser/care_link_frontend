@@ -35,20 +35,20 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="w-full bg-blue-400 text-white shadow fixed top-0 left-0 z-50">
+    <nav className="flex items-center w-full bg-cyan-600 text-white shadow fixed top-0 left-0 z-50">
       <div className="ml-20 mr-20">
         <div className="flex justify-between items-center h-16">
           <div className="text-xl font-bold">
             <Link to="/">CareLink</Link>
           </div>
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center ml-7 space-x-6">
             {!isAuthenticated ? (
               <>
-                <Link to="/" className="hover:text-gray-200">
-                  Login
+                <Link to="/patient" className="hover:text-gray-200">
+                  For Patients
                 </Link>
-                <Link to="/register" className="hover:text-gray-200">
-                  Register
+                <Link to="/provider" className="hover:text-gray-200">
+                  For Providers
                 </Link>
               </>
             ) : (
@@ -59,12 +59,12 @@ const Navbar: React.FC = () => {
                 <Link to="/appointments" className="hover:text-gray-200">
                   Appointments
                 </Link>
-                <div className="relative" ref={dropdownRef}>
+                <div className="relative ml-330" ref={dropdownRef}>
                   <button
                     onClick={() => setDropdownOpen(!dropdownOpen)}
                     className="focus:outline-none"
                   >
-                    <div className="w-9 h-9 rounded-full bg-white text-blue-600 flex items-center justify-center font-semibold">
+                    <div className="w-9 h-9 rounded-full bg-white text-cyan-700 flex items-center justify-center font-semibold">
                       {avatarLetter}
                     </div>
                   </button>
