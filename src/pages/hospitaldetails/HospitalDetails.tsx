@@ -34,7 +34,7 @@ export default function HospitalDetails() {
 
   const [fileList, setFileList] = useState<File[]>([]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
 
     const payload = {
@@ -47,7 +47,7 @@ export default function HospitalDetails() {
       description: "hjdf hjbdfh sgdshg dsgf",
       // fileList
     };
-    axiosInstance
+   await axiosInstance
       .post("/hospitals", payload)
       .then(function (response) {
         console.log(response);
