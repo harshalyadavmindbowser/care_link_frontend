@@ -6,6 +6,7 @@ import Login from './pages/login/Login';
 import Dashboard from './pages/dashboard/Dashboard';
 import Footer from './components/Footer';
 import Register from './pages/register/Register';
+import HospitalDetails from './pages/hospitaldetails/HospitalDetails';
 
 
 const Profile = () => <div className="p-4"> Profile Page </div>;
@@ -25,6 +26,7 @@ const AppWrapper: React.FC = () => {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
+           <Route path="/hospitaldetails" element={<HospitalDetails />} />
         <Route path="/appointments" element={<Appointment />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
