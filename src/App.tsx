@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import PatientRegister from './pages/register/PatientRegister';
 import ProviderRegister from './pages/register/ProviderRegister';
 import HospitalDetails from './pages/hospitaldetails/HospitalDetails';
+import MapPage from './pages/map/map';
 
 const Profile = () => <div className="p-4">Profile Page</div>;
 
@@ -31,6 +32,8 @@ const AppWrapper: React.FC = () => {
           <Route path="/hospitaldetails" element={<HospitalDetails />} />
           <Route path="/appointments" element={<Appointment />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path='/map' element={<MapPage />} />
+
         </Routes>
       </main>
 
