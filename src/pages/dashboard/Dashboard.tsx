@@ -53,7 +53,7 @@ export default function Dashboard() {
       <p className="text-xl font-semibold mb-2">Recent Appointment Requests</p>
       <div className="overflow-x-auto shadow-lg rounded-lg mb-8">
         <table className="w-full text-sm text-left bg-white">
-          <thead className="bg-cyan-600 text-white">
+          <thead className="bg-[#2C253D] text-white">
             <tr>
               <th className="p-3">Patient Name</th>
               <th className="p-3">Date</th>
