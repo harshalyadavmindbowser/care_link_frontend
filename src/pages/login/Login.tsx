@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import axiosInstance from "../../utils/axios";
-import { setSession } from "../../auth/utils";
+import { setSession } from "../../auth/utils.ts";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
