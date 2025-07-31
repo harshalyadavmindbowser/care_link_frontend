@@ -1,10 +1,9 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-// import { useAuth } from "../../context/AuthContext";
-import { ImageConfig } from "../../config/ImageConfig";
-import { PhotoIcon } from "@heroicons/react/24/solid";
-// import DropFileInput from "../../components/DropFileInput";
-import axios from "axios";
+import { useAuth } from "../../context/AuthContext";
+import { PhotoIcon } from '@heroicons/react/24/solid'
+import DropFileInput from "../../components/DropFileInput";
+
 
 type categoryObject = {
   id: string;
@@ -20,41 +19,47 @@ const categoryList: categoryObject[] = [
 
 export default function HospitalDetails() {
   const navigate = useNavigate();
-  // const [images, setImages] = useState([]);
-  const [address, setAddress] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [website, setWebsite] = useState("");
+  const { login } = useAuth();
+  const [email, setEmail] = useState("");
+   const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [ categoryValue, setCategoryValue] = useState("");
 
-  const [name, setName] = useState("");
 
-  const [categoryValue, setCategoryValue] = useState("");
 
-  const wrapperRef = useRef<HTMLDivElement | null>(null);
 
-  const [fileList, setFileList] = useState<File[]>([]);
-
-  const handleSubmit = (e: React.FormEvent) => {
+  
+  const validateEmail = (email: string) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-
-    const payload = {
-      provider_id: "1223344",
-      hospital_name: name,
-      contact_info: phoneNumber,
-      hospital_website: website,
-      location_id: "12233",
-      categoryValue,
-      description: "hjdf hjbdfh sgdshg dsgf",
-      // fileList
-    };
-    axios
-      .post("http://localhost:8080/hospitals", payload)
-      .then(function (response) {
-        console.log(response);
-        navigate("/dashboard");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    let isValid = true;
+    setEmailError("");
+    setPasswordError("");
+    if (!validateEmail(email)) {
+      setEmailError("Please enter a valid email address.");
+      isValid = false;
+    }
+    if (password.length < 6) {
+      setPasswordError("Password must be at least 6 characters.");
+      isValid = false;
+    }
+    if (!isValid) return;
+    console.log("Email:", email);
+    console.log("Password:", password);
+    login({
+      email,
+      role: "doctor",
+      total_job_posted: 3,
+      total_cand_hired: 5,
+      active_job_posts: 2,
+    });
+  
+    navigate("/dashboard");
   };
 
   const onFileChange = (files: File[]) => {
@@ -84,87 +89,68 @@ export default function HospitalDetails() {
   };
 
   return (
-    <div className="relative h-full max-w-5xl mt-6 items-center left-3/12">
-      <div className=" relative top-6  w-full ">
-        <h1 className="text-black   w-full  font-bold text-3xl p-4">
-          Add Hospital Details
-        </h1>
-      </div>
-      <form onSubmit={handleSubmit} className="absolute pl-6 pt-8">
-        <div className={`inputGroup`}>
-          <label htmlFor="name">Hospital Name</label>
-          <input
-            id="name"
-            type="text"
-            placeholder="Enter hospital name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            className="border-2 outline-none"
-          />
-          {/* {emailError && <p className="errorText">{emailError}</p>} */}
-        </div>
-        <div className={`inputGroup`}>
-          <label htmlFor="address">Hospital Address</label>
-          <input
-            type="text"
-            id="address"
-            placeholder="Enter hospital address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`inputGroup`}>
-          <label htmlFor="phone_number">Hospital Phone Number</label>
-          <input
-            type="text"
-            id="phone_number"
-            placeholder="Enter hospital phone number"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`inputGroup`}>
-          <label htmlFor="website">Hospital Website</label>
-          <input
-            type="text"
-            id="website"
-            placeholder="Enter hospital website"
-            value={website}
-            onChange={(e) => setWebsite(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`inputGroup `}>
-          <label htmlFor="images">Select Categories</label>
-          {categoryList.map((items) => (
-            <button
-              className={`${
-                categoryValue === items.id
-                  ? "bg-gray-400"
-                  : "bg-gray-100 hover:bg-gray-500"
-              }flex-row p-2 cursor-pointer rounded-2xl m-2`}
-              key={items.id}
-              type="button"
-              onClick={() => setCategoryValue(items.id)}
-            >
-              {items.label}
-            </button>
-          ))}
-        </div>
-        <div className={`inputGroup`}>
-          {/* <DropFileInput onFileChange={onFileChange}/> */}
-          <div
-            ref={wrapperRef}
-            className="drop-file-input"
-            onDragEnter={onDragEnter}
-            onDragLeave={onDragLeave}
-            onDrop={onDrop}
-          >
-            <div className="col-span-full">
-              <label htmlFor="images">Upload Hospital Images</label>
+ 
+      <div className="relative h-full max-w-5xl mt-6 items-center left-3/12">
+        <div className=" relative top-6  w-full ">
+          <h1 className="text-black   w-full  font-bold text-3xl p-4">Add Hospital Details</h1>
+          </div>
+          <form onSubmit={handleLogin} className="absolute pl-6 pt-8">
+            <div >
+              <label htmlFor="name">Hospital Name</label>
+              <input
+                id="name"
+                type="text"
+                placeholder="Enter hospital name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                className="border-2 outline-none"
+              />
+              {emailError && <p className="errorText">{emailError}</p>}
+            </div>
+            <div >
+              <label htmlFor="address">Hospital Address</label>
+              <input
+                type="text"
+                id="address"
+                placeholder="Enter hospital address"
+                value={password}
+                // onChange={(e) => handleFileChangeetPassword(e.target.value)}
+                required
+              />
+            </div>
+            <div >
+              <label htmlFor="phone_number">Hospital Phone Number</label>
+              <input
+                type="text"
+                id="phone_number"
+                placeholder="Enter hospital phone number"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <div >
+              <label htmlFor="website">Hospital Website</label>
+              <input
+                type="text"
+                id="website"
+                placeholder="Enter hospital website"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+              <div className={`inputGroup ${passwordError ? "errorBox" : ""}`}>
+              <label htmlFor="images">Select Categories</label>
+              {categoryList.map((items)=>(
+                <button className={`${ categoryValue === items.id? 'bg-gray-400': 'bg-gray-100 hover:bg-gray-500' }flex-row p-2 cursor-pointer rounded-2xl m-2`} key={items.id} type="button" onClick={()=> setCategoryValue(items.id)}>{items.label}</button>
+              ))}
+           
+            </div>
+            <div >
+              <div className="col-span-full">
+               <label htmlFor="images">Upload Hospital Images</label>
               <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                 <div className="text-center">
                   <PhotoIcon
@@ -245,18 +231,15 @@ export default function HospitalDetails() {
                 ""
               )}
             </div>
-          ) : null}
-        </div>
-        <div className={`inputGroup`}>
-          <label htmlFor="location">Select Location</label>
-        </div>
-        <button
-          type="submit"
-          className="relative text-white rounded-3xl p-3 cursor-pointer  bg-[#38bff0] hover:bg-[#0d83ba]  "
-        >
-          Save Details
-        </button>
-      </form>
-    </div>
+              <div >
+              <label htmlFor="location">Select Location</label>
+            
+            </div>
+            <button type="submit" className="loginButton">
+              Save Details
+            </button>
+          </form>
+        
+      </div>
   );
 }
