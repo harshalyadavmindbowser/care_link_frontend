@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Login.css";
+// import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import axiosInstance from "../../utils/axios";
@@ -79,7 +79,7 @@ const Login: React.FC = () => {
           <form className="space-y-6" onSubmit={handleLogin}>
             {/* Email field */}
             <div>
-              <label className="block text-sm font-medium mb-1">Username or Email</label>
+              <label className="block text-sm font-medium mb-1">Email</label>
               <input
                 type="text"
                 value={email}
@@ -112,7 +112,7 @@ const Login: React.FC = () => {
             {/* Submit button */}
             <button
               type="submit"
-              className="w-full mt-4 bg-[#2C253D] text-white py-3 rounded-full shadow-md hover:bg-[#3b334e] transition"
+              className="w-full mt-4 bg-blue-400 text-white py-3 rounded-full shadow-md hover:bg-blue-500 transition"
             >
               Log In
             </button>
