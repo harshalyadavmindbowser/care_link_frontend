@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 // import { useAuth } from "../../context/AuthContext";
 import { ImageConfig } from "../../config/ImageConfig";
 import { PhotoIcon } from "@heroicons/react/24/solid";
+import axiosInstance from "../../utils/axios";
 // import DropFileInput from "../../components/DropFileInput";
-import axios from "axios";
+
 
 type categoryObject = {
   id: string;
@@ -33,7 +34,7 @@ export default function HospitalDetails() {
 
   const [fileList, setFileList] = useState<File[]>([]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
 
     const payload = {
@@ -46,8 +47,8 @@ export default function HospitalDetails() {
       description: "hjdf hjbdfh sgdshg dsgf",
       // fileList
     };
-    axios
-      .post("http://localhost:8080/hospitals", payload)
+   await axiosInstance
+      .post("/hospitals", payload)
       .then(function (response) {
         console.log(response);
         navigate("/dashboard");
