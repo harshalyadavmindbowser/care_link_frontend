@@ -22,13 +22,13 @@ const AppWrapper: React.FC = () => {
     <>
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <main>
+      <main className="flex-grow">
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/patient" element={<PatientRegister />} />
         <Route path="/provider" element={<ProviderRegister />} />
         <Route path="/dashboard" element={<Dashboard />} />
-           <Route path="/hospitaldetails" element={<HospitalDetails />} />
+        <Route path="/hospitaldetails" element={<HospitalDetails />} />
         <Route path="/appointments" element={<Appointment />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
