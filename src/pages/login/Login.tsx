@@ -1,38 +1,62 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import "./Login.css";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import axiosInstance from "../../utils/axios";
+import { setSession } from "../../auth/utils";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const { login } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const validateEmail = (email: string) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+  const handleLogin =async (e: React.FormEvent) => {
     e.preventDefault();
-
-    let valid = true;
-
-    // Email validation
-    if (!email.includes('@')) {
-      setEmailError('Please enter a valid email address.');
-      valid = false;
-    } else {
-      setEmailError('');
+    let isValid = true;
+    setEmailError("");
+    setPasswordError("");
+    if (!validateEmail(email)) {
+      setEmailError("Please enter a valid email address.");
+      isValid = false;
     }
-
-    // Password validation
     if (password.length < 6) {
-      setPasswordError('Password must be at least 6 characters.');
-      valid = false;
-    } else {
-      setPasswordError('');
+      setPasswordError("Password must be at least 6 characters.");
+      isValid = false;
     }
+    if (!isValid) return;
+    console.log("Email:", email);
+    console.log("Password:", password);
 
-    if (valid) {
-      navigate('/dashboard');
-    }
+   const payload = {
+      email,
+      password
+    };
+   const response =await axiosInstance.post("/auth/login", payload)
+      // .then(function (response) {
+        console.log("Response",response);
+        const {accessToken}= response.data;
+        console.log("token",accessToken);
+        
+        if(accessToken){
+            setSession(accessToken);
+        }
+
+        navigate("/dashboard");
+  login({
+   
+      email,
+      role: "doctor",
+      total_job_posted: 3,
+      total_cand_hired: 5,
+      active_job_posts: 2,
+    });
+    
   };
 
   return (
@@ -52,7 +76,7 @@ const Login: React.FC = () => {
       {/* Right section */}
       <div className="flex-1 mr-90 flex items-center justify-center px-10">
         <div className="w-full max-w-md">
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-6" onSubmit={handleLogin}>
             {/* Email field */}
             <div>
               <label className="block text-sm font-medium mb-1">Username or Email</label>
