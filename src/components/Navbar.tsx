@@ -36,13 +36,13 @@ const Navbar: React.FC = () => {
   };
 
   const navLinkClass = (path: string) =>
-  `relative pb-1 after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-[#2C253D] after:transition-all after:duration-800 after:w-0 hover:after:w-full ${
+  `relative pb-1 after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-blue-400 after:transition-all after:duration-800 after:w-0 hover:after:w-full ${
     location.pathname === path ? "after:w-full" : ""
   }`;
 
 
   return (
-    <nav className="flex items-center ml-60 mt-5 w-full text-black bg-white fixed top-0 left-0 z-50 px-6 h-16">
+    <nav className="flex items-center ml-60 w-full text-black bg-white fixed left-0 z-50 px-6 h-16">
       <div className="flex justify-between items-center w-full">
         <div className="text-xl font-bold">
   <Link to="/">
@@ -56,7 +56,7 @@ const Navbar: React.FC = () => {
 
 
         {/* Right section */}
-        <div className="flex mt-6 mr-150 items-center space-x-6 ml-auto">
+        <div className="flex  mr-150 items-center space-x-6 ml-auto">
           {!isAuthenticated ? (
             <>
               <Link to="/patient" className={navLinkClass("/patient")}>
@@ -79,7 +79,7 @@ const Navbar: React.FC = () => {
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                   className="focus:outline-none"
                 >
-                  <div className="w-9 h-9 rounded-full bg-white text-cyan-700 flex items-center justify-center font-semibold">
+                  <div className="w-9 h-9 rounded-full bg-blue-400 text-white flex items-center justify-center font-semibold">
                     {avatarLetter}
                   </div>
                 </button>

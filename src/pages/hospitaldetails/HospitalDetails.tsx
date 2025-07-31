@@ -85,59 +85,73 @@ export default function HospitalDetails() {
   };
 
   return (
-    <div className="relative h-full max-w-5xl mt-6 items-center left-3/12">
+    <div className="relative top-15 h-full max-w-5xl mt-6 items-center left-3/12">
       <div className=" relative top-6  w-full ">
         <h1 className="text-black   w-full  font-bold text-3xl p-4">
           Add Hospital Details
         </h1>
       </div>
       <form onSubmit={handleSubmit} className="absolute pl-6 pt-8">
-        <div className={`inputGroup`}>
-          <label htmlFor="name">Hospital Name</label>
-          <input
-            id="name"
-            type="text"
-            placeholder="Enter hospital name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            className="border-2 outline-none"
-          />
-          {/* {emailError && <p className="errorText">{emailError}</p>} */}
-        </div>
-        <div className={`inputGroup`}>
-          <label htmlFor="address">Hospital Address</label>
-          <input
-            type="text"
-            id="address"
-            placeholder="Enter hospital address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`inputGroup`}>
-          <label htmlFor="phone_number">Hospital Phone Number</label>
-          <input
-            type="text"
-            id="phone_number"
-            placeholder="Enter hospital phone number"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            required
-          />
-        </div>
-        <div className={`inputGroup`}>
-          <label htmlFor="website">Hospital Website</label>
-          <input
-            type="text"
-            id="website"
-            placeholder="Enter hospital website"
-            value={website}
-            onChange={(e) => setWebsite(e.target.value)}
-            required
-          />
-        </div>
+        <div className="mb-4">
+  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+    Hospital Name
+  </label>
+  <input
+    id="name"
+    type="text"
+    placeholder="Enter hospital name"
+    value={name}
+    onChange={(e) => setName(e.target.value)}
+    required
+    className="w-full border-2 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+</div>
+
+<div className="mb-4">
+  <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
+    Hospital Address
+  </label>
+  <input
+    type="text"
+    id="address"
+    placeholder="Enter hospital address"
+    value={address}
+    onChange={(e) => setAddress(e.target.value)}
+    required
+    className="w-full border-2 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+</div>
+
+<div className="mb-4">
+  <label htmlFor="phone_number" className="block text-sm font-medium text-gray-700 mb-1">
+    Hospital Phone Number
+  </label>
+  <input
+    type="text"
+    id="phone_number"
+    placeholder="Enter hospital phone number"
+    value={phoneNumber}
+    onChange={(e) => setPhoneNumber(e.target.value)}
+    required
+    className="w-full border-2 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+</div>
+
+<div className="mb-4">
+  <label htmlFor="website" className="block text-sm font-medium text-gray-700 mb-1">
+    Hospital Website
+  </label>
+  <input
+    type="text"
+    id="website"
+    placeholder="Enter hospital website"
+    value={website}
+    onChange={(e) => setWebsite(e.target.value)}
+    required
+    className="w-full border-2 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+</div>
+
         <div className={`inputGroup `}>
           <label htmlFor="images">Select Categories</label>
           {categoryList.map((items) => (
@@ -253,7 +267,7 @@ export default function HospitalDetails() {
         </div>
         <button
           type="submit"
-          className="relative text-white rounded-3xl p-3 cursor-pointer  bg-[#38bff0] hover:bg-[#0d83ba]  "
+          className="relative top-10 text-white rounded-3xl p-3 cursor-pointer  bg-[#38bff0] hover:bg-[#0d83ba]  "
         >
           Save Details
         </button>
