@@ -1,5 +1,5 @@
 import classNames from "classnames"
-import { useState, type ChangeEvent } from "react"
+import { useState } from "react"
 
 interface SearchProps {
     className: string,
@@ -11,10 +11,18 @@ const SearchBar: React.FC<SearchProps> = ({ className, placeholder = "Search..."
     const [searchTerm, setSearchTerm] = useState('');
 
 
-    const handelChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setSearchTerm(value);
-        if (onSearch) onSearch(value);
+    }
+
+    const handleEnterKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            if (onSearch) {
+                onSearch(searchTerm);
+            }
+        }
     }
 
     const finalClassNames = classNames("bg-white text-sm rounded h-10 pl-10 pr-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-500", "bg-[url(/public/icons/searchIcon/searchIcon.svg)] bg-no-repeat  bg-center bg-left bg-position-[0.5rem]", className)
@@ -25,7 +33,8 @@ const SearchBar: React.FC<SearchProps> = ({ className, placeholder = "Search..."
                 className={finalClassNames}
                 {...rest}
                 value={searchTerm}
-                onChange={handelChange} />
+                onChange={handleChange}
+                onKeyDown={handleEnterKey} />
         </div>
     )
 }
