@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import axiosInstance from "../../utils/axios";
+import { setSession } from "../../auth/utils";
+
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -13,7 +16,7 @@ const Login: React.FC = () => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
   };
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin =async (e: React.FormEvent) => {
     e.preventDefault();
     let isValid = true;
     setEmailError("");
@@ -29,15 +32,31 @@ const Login: React.FC = () => {
     if (!isValid) return;
     console.log("Email:", email);
     console.log("Password:", password);
-    login({
+
+   const payload = {
+      email,
+      password
+    };
+   const response =await axiosInstance.post("/auth/login", payload)
+      // .then(function (response) {
+        console.log("Response",response);
+        const {accessToken}= response.data;
+        console.log("token",accessToken);
+        
+        if(accessToken){
+            setSession(accessToken);
+        }
+
+        navigate("/dashboard");
+  login({
+   
       email,
       role: "doctor",
       total_job_posted: 3,
       total_cand_hired: 5,
       active_job_posts: 2,
     });
-
-    navigate("/dashboard");
+    
   };
   return (
     <div
