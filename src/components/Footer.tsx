@@ -3,7 +3,7 @@ import { FaInstagram, FaFacebookF, FaTwitter } from "react-icons/fa";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-cyan-600 text-white py-12 px-6">
+    <footer className="bg-[#2C253D] text-white py-12 px-6">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-8">
         <div className="md:w-1/2">
           <h2 className="text-2xl font-semibold mb-2">About carelink</h2>
