@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 function ProfileCard() {
-  const [profilePic, setProfilePic] = useState(null);
+  const [profilePic] = useState(null);
   const [showPasswordForm, setShowPasswordForm] = useState(false);
 
   const [formData] = useState({
@@ -19,9 +19,10 @@ function ProfileCard() {
 
   const firstLetter = formData.name.charAt(0).toUpperCase();
 
-  const handlePasswordChange = (e) => {
-    setPasswordData({ ...passwordData, [e.target.name]: e.target.value });
-  };
+const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  setPasswordData({ ...passwordData, [e.target.name]: e.target.value });
+};
+
 
   const handlePasswordSubmit = () => {
     console.log("Resetting password with:", passwordData);
