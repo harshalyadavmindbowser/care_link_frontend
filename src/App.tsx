@@ -8,8 +8,8 @@ import Footer from './components/Footer';
 import Register from './pages/register/Register';
 import HospitalDetails from './pages/hospitaldetails/HospitalDetails';
 import MapPage from './pages/map/map';
+import Profile from './pages/profile/Profile';
 
-const Profile = () => <div className="p-4">Profile Page</div>;
 
 const AppWrapper: React.FC = () => {
   const location = useLocation();
