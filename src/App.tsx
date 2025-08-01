@@ -19,10 +19,10 @@ const AppWrapper: React.FC = () => {
   console.log("Is Login/Register Page:", isLoginPage);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex bg-white-500 flex-col min-h-screen">
       <Navbar />
 
-      <main className="flex-grow overflow-y-auto px-6 py-8 bg-gray-50">
+      <main className="flex-grow overflow-y-auto px-6 py-8">
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/patient" element={<Register />} />
