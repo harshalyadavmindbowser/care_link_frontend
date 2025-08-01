@@ -1,6 +1,6 @@
-import React, { useState, MouseEvent } from "react";
+// import React, { useState, MouseEvent } from "react";
 import SearchBar from "../../components/SearchBar";
-import Button from "../../components/Button";
+// import Button from "../../components/Button";
 import AppoitmentCard from "../../components/AppoitmentCard";
 
 const Appointment: React.FC = () => {
@@ -52,9 +52,9 @@ const Appointment: React.FC = () => {
         <SearchBar className="bg-gray-200 w-[100px]"/>
       </section>
       <section className="flex gap-6 p-3">
-        <Button className="border-none hover:outline rounded-full" onClick={() => handleFilter("pending")}>Pending</Button>
+        {/* <Button className="border-none hover:outline rounded-full" onClick={() => handleFilter("pending")}>Pending</Button>
         <Button className="border-none hover:outline rounded-full" onClick={() => handleFilter("approved")}>Approved</Button>
-        <Button className="border-none hover:outline rounded-full" onClick={() => handleFilter("cancled")}>Cancled</Button>
+        <Button className="border-none hover:outline rounded-full" onClick={() => handleFilter("cancled")}>Cancled</Button> */}
       </section>
       <hr />
       <div className="h-120 overflow-y-scroll">
