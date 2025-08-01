@@ -5,8 +5,7 @@ import Appointment from './pages/appointment/Appointment';
 import Login from './pages/login/Login';
 import Dashboard from './pages/dashboard/Dashboard';
 import Footer from './components/Footer';
-import PatientRegister from './pages/register/PatientRegister';
-import ProviderRegister from './pages/register/ProviderRegister';
+import Register from './pages/register/Register';
 import HospitalDetails from './pages/hospitaldetails/HospitalDetails';
 import MapPage from './pages/map/map';
 import Profile from './pages/profile/Profile';
@@ -26,8 +25,8 @@ const AppWrapper: React.FC = () => {
       <main className="flex-grow overflow-y-auto px-6 py-8 bg-gray-50">
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/patient" element={<PatientRegister />} />
-          <Route path="/provider" element={<ProviderRegister />} />
+          <Route path="/patient" element={<Register />} />
+          <Route path="/provider" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/hospitaldetails" element={<HospitalDetails />} />
           <Route path="/appointments" element={<Appointment />} />
