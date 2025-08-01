@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import axiosInstance from "../../utils/axios";
@@ -12,8 +11,8 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  
 
-  // Track focus states
   const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
 
@@ -64,29 +63,28 @@ const Login: React.FC = () => {
       });
     } catch (error) {
       console.error("Login error:", error);
-      // You can handle API errors here if you want
     }
   };
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-white text-[#2C253D]">
-      {/* Left section */}
+      {/* left section */}
       <div className="flex-1 ml-80 flex flex-col justify-center items-start px-10 py-20">
         <h1 className="text-5xl font-serif font-medium">Log in to our</h1>
         <h2 className="text-5xl italic font-serif mt-2">Community.</h2>
         <p className="mt-8 text-sm">
           Not a member of the community?{" "}
-          <a href="#" className="text-blue-700 underline">
-            Join now
+          <a href="/patient" className="text-blue-400 underline">
+            Register now
           </a>
         </p>
       </div>
 
-      {/* Right section */}
+      {/* right section */}
       <div className="flex-1 mr-90 flex items-center justify-center px-10">
         <div className="w-full max-w-md">
           <form className="space-y-6" onSubmit={handleLogin}>
-            {/* Email field */}
+            {/* email field */}
             <div className="relative w-full mt-4">
               <input
                 type="text"
@@ -99,25 +97,32 @@ const Login: React.FC = () => {
                 className={`
                   peer w-full border-b py-2 bg-transparent placeholder-transparent focus:outline-none 
                   transition-all
-                  ${emailError ? "border-red-500 focus:border-red-500" : "border-gray-300 focus:border-[#2C253D]"}
+                  ${
+                    emailError
+                      ? "border-red-500 focus:border-red-500"
+                      : "border-gray-300 focus:border-[#2C253D]"
+                  }
                 `}
               />
               <label
                 htmlFor="email"
                 className={`
                   absolute left-0 text-gray-500 transition-all duration-300
-                  ${emailFocused || email
-                    ? "top-[-0.9rem] text-sm text-[#2C253D]"
-                    : "top-2.5 text-base text-gray-400"
+                  ${
+                    emailFocused || email
+                      ? "top-[-0.9rem] text-sm text-[#2C253D]"
+                      : "top-2.5 text-base text-gray-400"
                   }
                 `}
               >
                 Email
               </label>
-              {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
+              {emailError && (
+                <p className="text-red-500 text-sm mt-1">{emailError}</p>
+              )}
             </div>
 
-            {/* Password field */}
+            {/* password field */}
             <div className="relative mt-10 w-full mt-4">
               <input
                 id="password"
@@ -129,25 +134,32 @@ const Login: React.FC = () => {
                 onBlur={() => setPasswordFocused(false)}
                 className={`
                   peer w-full border-b py-2 bg-transparent placeholder-transparent focus:outline-none transition-all
-                  ${passwordError ? "border-red-500 focus:border-red-500" : "border-gray-300 focus:border-[#2C253D]"}
+                  ${
+                    passwordError
+                      ? "border-red-500 focus:border-red-500"
+                      : "border-gray-300 focus:border-[#2C253D]"
+                  }
                 `}
               />
               <label
                 htmlFor="password"
                 className={`
                   absolute left-0 text-gray-500 transition-all duration-300
-                  ${passwordFocused || password
-                    ? "top-[-0.9rem] text-sm text-[#2C253D]"
-                    : "top-2.5 text-base text-gray-400"
+                  ${
+                    passwordFocused || password
+                      ? "top-[-0.9rem] text-sm text-[#2C253D]"
+                      : "top-2.5 text-base text-gray-400"
                   }
                 `}
               >
                 Password
               </label>
-              {passwordError && <p className="text-red-500 text-sm mt-1">{passwordError}</p>}
+              {passwordError && (
+                <p className="text-red-500 text-sm mt-1">{passwordError}</p>
+              )}
             </div>
 
-            {/* Submit button */}
+            {/* submit button */}
             <button
               type="submit"
               className="w-full mt-4 bg-blue-400 text-white py-3 rounded-full shadow-md hover:bg-blue-500 transition"

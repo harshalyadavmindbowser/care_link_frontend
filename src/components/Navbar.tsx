@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
 
 
   return (
-    <nav className="flex items-center ml-60 w-full text-black bg-white fixed left-0 z-50 px-6 h-16">
+    <nav className="flex ml-10 items-center w-full text-black bg-white fixed left-0 z-50 px-6 h-16">
       <div className="flex justify-between items-center w-full">
         <div className="text-xl font-bold">
   <Link to="/">
@@ -56,7 +56,7 @@ const Navbar: React.FC = () => {
 
 
         {/* Right section */}
-        <div className="flex  mr-150 items-center space-x-6 ml-auto">
+        <div className="flex mr-30 items-center space-x-6 ml-auto">
           {!isAuthenticated ? (
             <>
               <Link to="/patient" className={navLinkClass("/patient")}>

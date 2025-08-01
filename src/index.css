@@ -1,8 +1,8 @@
 @import "tailwindcss";
-/* @tailwind base;
+@tailwind base;
 @tailwind components;
-@tailwind utilities; */
+@tailwind utilities;
 
 html, body {
-  @apply h-screen overflow-y-auto bg-gray-50;
+  @apply h-screen overflow-y-auto bg-white;
 }
