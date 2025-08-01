@@ -1,11 +1,9 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-// import { useAuth } from "../../context/AuthContext";
 import { ImageConfig } from "../../config/ImageConfig";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 import axiosInstance from "../../utils/axios";
-// import DropFileInput from "../../components/DropFileInput";
-
+import { useLocation } from "react-router-dom";
 
 type categoryObject = {
   id: string;
@@ -25,30 +23,34 @@ export default function HospitalDetails() {
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [website, setWebsite] = useState("");
-
   const [name, setName] = useState("");
-
   const [categoryValue, setCategoryValue] = useState("");
-
   const wrapperRef = useRef<HTMLDivElement | null>(null);
-
   const [fileList, setFileList] = useState<File[]>([]);
-
+  const location = useLocation();
+  const providerData = location.state;
+  console.log("tracks",providerData.data.id);
+  
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
+    if(providerData ==undefined && providerData== null){
+       alert('Provide details missing');
+    }else{
+      const providerId= providerData.data.id;
+      const formData= new FormData();
+      formData.append('provider_id',providerId);
+      formData.append('hospital_name',name);
+      formData.append('contact_info',phoneNumber);
+      formData.append('hospital_website',providerId);
+      formData.append('latitude','1223333');
+      formData.append('hospital_categories',categoryValue);
+      for(let i=0; i<fileList.length;i++){
+        formData.append(`images${i+1}`,fileList[i]);
 
-    const payload = {
-      provider_id: "1223344",
-      hospital_name: name,
-      contact_info: phoneNumber,
-      hospital_website: website,
-      location_id: "12233",
-      categoryValue,
-      description: "hjdf hjbdfh sgdshg dsgf",
-      // fileList
-    };
+      }
+
    await axiosInstance
-      .post("/hospitals", payload)
+      .post("/hospitals", formData)
       .then(function (response) {
         console.log(response);
         navigate("/dashboard");
@@ -56,6 +58,9 @@ export default function HospitalDetails() {
       .catch(function (error) {
         console.log(error);
       });
+    }
+
+   
   };
 
   const onFileChange = (files: File[]) => {
