@@ -20,11 +20,12 @@ const ReusableModal: React.FC<ReusableModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
-      <div className="bg-white rounded-lg w-full max-w-md p-6 shadow-lg relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-200/50">
+
+      <div className="bg-white rounded-lg w-[600px] h-[300px] p-6 flex flex-col items-center justify-center text-center space-y-6 relative">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+          className="absolute cursor-pointer top-4 right-4 text-gray-400 hover:text-gray-600"
         >
           &times;
         </button>
@@ -32,9 +33,9 @@ const ReusableModal: React.FC<ReusableModalProps> = ({
         {showTickImage && (
           <div className="flex justify-center mb-4">
             <img
-              src="/confirmTick.png" 
+              src="/confirmTick.png"
               alt="Success"
-              className="w-12 h-12"
+              className="w-30 h-30 bg-transparent"
             />
           </div>
         )}
@@ -43,7 +44,7 @@ const ReusableModal: React.FC<ReusableModalProps> = ({
 
         <div className="mb-4">{children}</div>
 
-        {footer && <div className="flex justify-end space-x-2">{footer}</div>}
+        {footer && <div className="flex justify-center space-x-2">{footer}</div>}
       </div>
     </div>
   );
