@@ -8,13 +8,10 @@ import useFetchData from '../../hooks/useHospitalFetchData';
 
 function HospitalsNearYou() {
     const [place, setPlace] = useState<Place | null>(null);
-    const [radius, setRadius] = useState<number>(10);
+    const [radius, setRadius] = useState<number>(16);
     const { hospitalData } = useFetchData();
 
-    const hospitalImages = hospitalData?.images || [];
-
-
-
+    console.log('hospitalData', hospitalData)
     return (
         <div className="grid grid-cols-12 w-full gap-4 px-4 mt-10">
             <div className="col-span-3">
@@ -24,10 +21,20 @@ function HospitalsNearYou() {
             <div className="col-span-9 mt-3">
                 <Map place={place} radius={radius} />
                 <div className="col-span-9 mt-5">
-                    <HospitalCard hospitalName={hospitalData?.hospital_name} hospitalAddress={hospitalData?.hospital_address} hospitalImages={hospitalImages} />
+                    {
+                        hospitalData?.map((hospital, index) => (
+                            <HospitalCard
+                                key={index}
+                                hospitalName={hospital.hospital_name}
+                                hospitalAddress={hospital.hospital_address}
+                                hospitalImages={hospital.images}
+                            />
+                        ))
+                        }
+
                 </div>
             </div>
-        </div>
+        </div >
 
     )
 }

@@ -111,7 +111,7 @@ const AppointmentCard: React.FC<AppoitmentCardProps> = ({ date, time, personName
         </div>
       </div>
       <div>
-        <ImageCard />
+        <ImageCard imgUrl={""}/>
       </div>
       {/* Modal */}
       <ReusableModal

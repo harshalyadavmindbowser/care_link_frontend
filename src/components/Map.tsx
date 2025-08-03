@@ -17,10 +17,6 @@ const customIcon = icon({
     iconSize: [40, 40],
 });
 
-const radiusToZoom = (r: number): number => {
-    return Math.max(11, 16 - Math.log2(r));
-}
-
 const Map = ({ place, radius }: MapProps) => {
     const mapRef = useRef<LeafletMap | null>(null);
     const [lat, setLatitude] = useState<number>(18.554175348771114);
@@ -43,11 +39,10 @@ const Map = ({ place, radius }: MapProps) => {
 
     useEffect(() => {
         if (mapRef.current) {
-            const zoom = radiusToZoom(radius);
             if (place) {
-                mapRef.current.flyTo([place.latitude, place.longitude], zoom);
+                mapRef.current.flyTo([place.latitude, place.longitude], radius);
             } else {
-                mapRef.current.flyTo([lat, long], zoom);
+                mapRef.current.flyTo([lat, long], radius);
             }
         }
     }, [place, lat, long, radius]);

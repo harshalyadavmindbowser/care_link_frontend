@@ -9,6 +9,7 @@ import Register from './pages/register/Register';
 import HospitalDetails from './pages/hospitaldetails/HospitalDetails';
 import HospitalsNearYou from './pages/map/HospitalsNearYou';
 import Profile from './pages/profile/Profile';
+import PageNotFound from './pages/pagenotfound/PageNotFound';
 
 
 const AppWrapper: React.FC = () => {
@@ -32,7 +33,7 @@ const AppWrapper: React.FC = () => {
           <Route path="/appointments" element={<Appointment />} />
           <Route path="/profile" element={<Profile />} />
           <Route path='/hospitals' element={<HospitalsNearYou />} />
-
+          <Route path="*" element={<PageNotFound/>} />
         </Routes>
       </main>
 
