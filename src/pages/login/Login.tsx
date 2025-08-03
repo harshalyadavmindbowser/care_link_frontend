@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
-import axiosInstance from "../../utils/axios";
-import { setSession } from "../../auth/utils";
+import { useAuth } from "../../context/useAuth";
+// import { useNavigate } from "react-router-dom";
+
 
 const Login: React.FC = () => {
-  const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login,userRole } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -15,7 +13,8 @@ const Login: React.FC = () => {
 
   const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
-
+  
+  // const navigate=useNavigate();
   const validateEmail = (email: string) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
@@ -36,31 +35,15 @@ const Login: React.FC = () => {
     }
     if (!isValid) return;
 
-    console.log("Email:", email);
+    console.log("Email:", userRole);
     console.log("Password:", password);
-
-    const payload = {
-      email,
-      password,
-    };
     try {
-      const response = await axiosInstance.post("/auth/login", payload);
-      console.log("Response", response);
-      const { accessToken } = response.data;
-      console.log("token", accessToken);
-
-      if (accessToken) {
-        setSession(accessToken);
-      }
-
-      navigate("/dashboard");
       login({
         email,
-        role: "doctor",
-        total_job_posted: 3,
-        total_cand_hired: 5,
-        active_job_posts: 2,
+        password,
+         
       });
+     
     } catch (error) {
       console.error("Login error:", error);
     }

@@ -29,7 +29,7 @@ export default function HospitalDetails() {
   const [fileList, setFileList] = useState<File[]>([]);
   const location = useLocation();
   const providerData = location.state;
-  console.log("tracks",providerData.data.id);
+  // console.log("tracks",providerData.data.id);
   
   const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
@@ -44,21 +44,17 @@ export default function HospitalDetails() {
       formData.append('hospital_website',providerId);
       formData.append('latitude','1223333');
       formData.append('hospital_categories',categoryValue);
+      formData.append('provider_status',"true");
       for(let i=0; i<fileList.length;i++){
         formData.append(`images${i+1}`,fileList[i]);
 
       }
 
-   await axiosInstance
+   const response=await axiosInstance
       .post("/hospitals", formData)
-      .then(function (response) {
-        console.log(response);
-        navigate("/dashboard");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    }
+      if(response){
+         navigate("/dashboard");
+      }}
 
    
   };

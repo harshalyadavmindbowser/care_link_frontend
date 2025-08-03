@@ -1,4 +1,5 @@
-import { useAuth } from "../../context/AuthContext";
+import {useEffect} from "react";
+import { useAuth } from "../../context/useAuth";
 
 interface Patient {
   id: number;
@@ -22,7 +23,14 @@ const patientIno: Patient[] = [
 
 export default function Dashboard() {
   const { user } = useAuth();
+  console.log("user",user?.full_name)
 
+    useEffect(() => {
+    //     sessionStorage.setItem("currentUser", JSON.stringify(currentUser))
+        //  const currentUser11 = sessionStorage.getItem("currentUser");
+    //  console.log("currentUser11", currentUser11)
+        console.log("hello djdjdj j",localStorage.getItem('accessToken'));
+    }, [ user])
   const appointmnetsToday = user?.total_job_posted || 0;
   const pendingRequests = user?.total_cand_hired || 0;
   const totalAppointments = user?.active_job_posts || 0;
@@ -30,7 +38,7 @@ export default function Dashboard() {
   return (
     <div className="p-10 ml-60 mt-16 px-4ml-60 mr-60">
       <p className="text-2xl font-semibold mb-4">Dashboard</p>
-      <p className="mb-6">Welcome back, Dr. </p>
+      <p className="mb-6">Welcome back, {user?.full_name} </p>
 
       {/* dashboard card */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
