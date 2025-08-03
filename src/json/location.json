@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "Jog Hospital",
+    "latitude": 18.5091699,
+    "longitude": 73.82159066
+  },
+  {
+    "id": 2,
+    "name": "Parivartan Ayurved Hospital",
+    "latitude": 18.5132423,
+    "longitude": 73.80802103
+  },
+  {
+    "id": 3,
+    "name": "Devyani Multy Speciality Hospital",
+    "latitude": 18.4949895,
+    "longitude": 73.81212228
+  },
+  {
+    "id": 4,
+    "name": "Suyash Hospital",
+    "latitude": 18.5000925,
+    "longitude": 73.81233642
+  },
+  {
+    "id": 5,
+    "name": "Sancheti Hospital",
+    "latitude": 18.5223492,
+    "longitude": 73.8505731
+  },
+  {
+    "id": 6,
+    "name": "Ruby Hall Clinic",
+    "latitude": 18.536248,
+    "longitude": 73.879612
+  },
+  {
+    "id": 7,
+    "name": "Jehangir Hospital",
+    "latitude": 18.5337627,
+    "longitude": 73.875869
+  },
+  {
+    "id": 8,
+    "name": "Deenanath Mangeshkar Hospital",
+    "latitude": 18.5166262,
+    "longitude": 73.829737
+  },
+  {
+    "id": 9,
+    "name": "Aditya Birla Memorial Hospital",
+    "latitude": 18.598949,
+    "longitude": 73.776123
+  },
+  {
+    "id": 10,
+    "name": "Columbia Asia Hospital",
+    "latitude": 18.589717,
+    "longitude": 73.738151
+  },
+  {
+    "id": 11,
+    "name": "Inamdar Multispeciality Hospital",
+    "latitude": 18.500142,
+    "longitude": 73.897722
+  },
+  {
+    "id": 12,
+    "name": "Bharati Hospital",
+    "latitude": 18.463852,
+    "longitude": 73.856858
+  }
+]

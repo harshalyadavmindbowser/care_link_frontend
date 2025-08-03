@@ -3,13 +3,13 @@ import { FaTwitter, FaLinkedin, FaFacebook } from "react-icons/fa";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-50 py-12">
+    <footer className="bg-blue-400 mt-200 py-12">
       <div className="max-w-6xl mx-auto px-6">
         {/* Top section: left + right */}
-        <div className="flex flex-col md:flex-row justify-between items-center md:items-start mb-8 text-gray-700 text-xs font-semibold gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-start mb-8 text-white-700 text-xs font-semibold gap-8">
           
           {/* Left Links */}
-          <div className="flex flex-col space-y-2 items-center md:items-start">
+          <div className="flex text-white flex-col space-y-2 items-center md:items-start">
             <a href="/profile" className="hover:underline">Profile</a>
             <a href="/dashboard" className="hover:underline">Dashboard</a>
             <a href="/appointments" className="hover:underline">Appointments</a>
@@ -17,8 +17,8 @@ const Footer: React.FC = () => {
 
           {/* Right Logo & Social */}
           <div className="flex flex-col items-center md:items-end">
-            <img src="/logo.png" alt="Your Logo" className="h-10 mb-4" />
-            <div className="flex space-x-6 text-gray-700">
+            <img src="/white-logo.png" alt="Your Logo" className="h-10 mb-4" />
+            <div className="flex space-x-6 text-white">
               <a
                 href="https://twitter.com"
                 target="_blank"
@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Bottom center copyright */}
-        <div className="text-center text-xs text-gray-500">
+        <div className="text-center text-xs text-gray-200">
           &copy; {new Date().getFullYear()} Carelink. All rights reserved.
         </div>
       </div>
