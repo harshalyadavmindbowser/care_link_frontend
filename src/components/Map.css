@@ -1,0 +1,26 @@
+.leaflet-popup-content-wrapper {
+    background: #ffffff;
+    border: 0.2rem solid #28a745;
+    border-radius: 10px;
+    padding: 4px;
+}
+
+.leaflet-popup-content-wrapper:hover {
+    background: #b0fccd;
+    color: white;
+}
+
+.leaflet-popup-content {
+    font-size: 14px;
+    color: #333333;
+}
+
+.leaflet-popup-tip-container {
+    background: #ffffff;
+}
+
+.leaflet-tooltip {
+    background-color: #d5e2d2;
+    color: #333; 
+    height: 35px;
+}

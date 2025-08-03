@@ -3,8 +3,14 @@ import ImageCard from "./ImageCard";
 import Button from "./Button";
 import ReusableModal from "./Modal";
 import axiosInstance from "../utils/axios";
+interface AppoitmentCardProps {
+  date: string;
+  time: string;
+  personName: string;
+  rejectionReason: string;
+}
+const AppointmentCard: React.FC<AppoitmentCardProps> = ({ date, time, personName, rejectionReason }) => {
 
-function AppointmentCard() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState<"approve" | "reject" | "rejectConfirmed" | null>(null);
   const [showTick, setShowTick] = useState(false);
@@ -52,6 +58,7 @@ function AppointmentCard() {
     }
   };
 
+
   const handleRejectConfirm = async () => {
     try {
       const payload = {
@@ -77,39 +84,35 @@ function AppointmentCard() {
     }
   };
 
-  const dateDisplay = "1/08/2025";
-  const timeDisplay = "10:00 AM";
-  const description =
-    "Dummy information typically refers to placeholder data used in place of real information for testing, demonstration, or development purposes.";
-
   return (
-    <div className="flex mt-3 p-2">
+    <div className="flex mt-3 p-2" >
       <div className="w-[1400px]">
-        <label htmlFor="name" className="font-bold">Shreyash Gailwad</label>
+        <label htmlFor="name" className="font-bold">{personName}</label>
         <p>
-          <label>Date: </label> {dateDisplay}<br />
-          <label>Time: </label> {timeDisplay}
+          <label htmlFor="date">Date :</label>
+          {date}
+          <br />
+          {
+            time && (
+              <>
+                <label htmlFor="time">Time :</label>
+                {time}
+
+              </>
+            )
+          }
         </p>
-        <p>{description}</p>
+        <p>
+          {rejectionReason}
+        </p>
         <div className="flex gap-2 mt-2">
-          <Button
-            className="border-none hover:outline rounded-full bg-gray-200"
-            onClick={handleApprove}
-          >
-            Approve
-          </Button>
-          <Button
-            className="border-none hover:outline rounded-full bg-gray-200"
-            onClick={handleReject}
-          >
-            Reject
-          </Button>
+          <Button className="border-none hover:outline rounded-full bg-gray-200" onClick={handleApprove}>Approve</Button>
+          <Button className="border-none hover:outline rounded-full  bg-gray-200" onClick={handleReject}>Reject</Button>
         </div>
       </div>
       <div>
         <ImageCard />
       </div>
-
       {/* Modal */}
       <ReusableModal
         isOpen={modalOpen}
@@ -123,12 +126,12 @@ function AppointmentCard() {
           showTick
             ? "Email has been sent to the patient"
             : modalType === "approve"
-            ? "Are you sure you want to accept the appointment?"
-            : modalType === "reject"
-            ? "Are you sure you want to reject the appointment?"
-            : modalType === "rejectConfirmed"
-            ? "Email has been sent to the patient"
-            : ""
+              ? "Are you sure you want to accept the appointment?"
+              : modalType === "reject"
+                ? "Are you sure you want to reject the appointment?"
+                : modalType === "rejectConfirmed"
+                  ? "Email has been sent to the patient"
+                  : ""
         }
         footer={
           !showTick &&
