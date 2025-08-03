@@ -7,7 +7,7 @@ import Dashboard from './pages/dashboard/Dashboard';
 import Footer from './components/Footer';
 import Register from './pages/register/Register';
 import HospitalDetails from './pages/hospitaldetails/HospitalDetails';
-import MapPage from './pages/map/map';
+import HospitalsNearYou from './pages/map/HospitalsNearYou';
 import Profile from './pages/profile/Profile';
 
 
@@ -31,7 +31,7 @@ const AppWrapper: React.FC = () => {
           <Route path="/hospitaldetails" element={<HospitalDetails />} />
           <Route path="/appointments" element={<Appointment />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path='/map' element={<MapPage />} />
+          <Route path='/hospitals' element={<HospitalsNearYou />} />
 
         </Routes>
       </main>

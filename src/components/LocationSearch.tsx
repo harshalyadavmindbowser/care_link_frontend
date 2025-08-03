@@ -32,24 +32,18 @@ const LocationSearch = ({ onPlaceClick, onRadiusChange }: LocationSearchProp) =>
 
 
     const handleCategoryChange = async (category: string) => {
-        // Toggle the category in the selected categories array
         setSelectedCategories((prevSelectedCategories) => {
             if (prevSelectedCategories.includes(category)) {
-                // Remove the category if it's already selected
                 return prevSelectedCategories.filter((item) => item !== category);
             } else {
-                // Add the category if it's not selected
                 return [...prevSelectedCategories, category];
             }
         });
 
-        // Send the selected categories to the backend
         try {
             const response = await axios.post('http://localhost:8080/hospitals/category', {
                 categoryNames: [...selectedCategories, category],
             });
-
-            // Handle the response if needed
             console.log('Selected Categories Sent to Backend:', response.data);
         } catch (error) {
             console.error('Error sending categories:', error);
@@ -60,7 +54,7 @@ const LocationSearch = ({ onPlaceClick, onRadiusChange }: LocationSearchProp) =>
     return (
         <div>
             <SearchBar
-                className="mt-2"
+                className="mt-2 bg-gray-200"
                 placeholder="Search for a location..."
                 onSearch={handleSearch}
             />
