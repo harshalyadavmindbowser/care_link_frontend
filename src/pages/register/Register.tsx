@@ -22,9 +22,29 @@ const Register: React.FC = () => {
   const [hospitalName, setHospitalName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [description, setDescription] = useState("");
+  const [emailError, setEmailError] = useState("");
+
+    const [emailFocused, setEmailFocused] = useState(false);
+    const validateEmail = (email: string) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
+
     e.preventDefault();
+      let isValid = true;
+    setEmailError("");
+    // setPasswordError("");
+    if (!validateEmail(email)) {
+      setEmailError("Please enter a valid email address.");
+      isValid = false;
+    }
+    if (password.length < 6) {
+      // setPasswordError("Password must be at least 6 characters.");
+      isValid = false;
+    }
+    if (!isValid) return;
     if (location.pathname == "/patient") {
       const payload = {
         full_name: name,
@@ -107,7 +127,7 @@ const Register: React.FC = () => {
               >
                 Email
               </label> */}
-              <input
+              {/* <input
                 type="text"
                 id="email"
                 placeholder="Email"
@@ -115,7 +135,45 @@ const Register: React.FC = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 className="w-full border-none border-gray-300 bg-[#E8EDF2] rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              /> */}
+
+                 <div className="relative w-full mt-4">
+              <input
+                type="text"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+                onFocus={() => setEmailFocused(true)}
+                onBlur={() => setEmailFocused(false)}
+                className={`
+                  peer w-full border-b py-2 bg-transparent placeholder-transparent focus:outline-none 
+                  transition-all
+                  ${
+                    emailError
+                      ? "border-red-500 focus:border-red-500"
+                      : "border-gray-300 focus:border-[#2C253D]"
+                  }
+                `}
               />
+              <label
+                htmlFor="email"
+                className={`
+                  absolute left-0 text-gray-500 transition-all duration-300
+                  ${
+                    emailFocused || email
+                      ? "top-[-0.9rem] text-sm text-[#2C253D]"
+                      : "top-2.5 text-base text-gray-400"
+                  }
+                `}
+              >
+                Email
+              </label>
+              {emailError && (
+                <p className="text-red-500 text-sm mt-1">{emailError}</p>
+              )}
+            </div>
+
             </div>
 
             <div className="mb-4">
