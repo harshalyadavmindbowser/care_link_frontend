@@ -2,7 +2,7 @@ import type { Place } from "../api/place";
 import "leaflet/dist/leaflet.css";
 import { icon, Map as LeafletMap } from 'leaflet';
 import { useEffect, useRef, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents, Tooltip } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, useMapEvents, Tooltip } from "react-leaflet";
 import locations from "../json/location.json"
 
 
@@ -26,6 +26,7 @@ const Map = ({ place, radius }: MapProps) => {
     const [lat, setLatitude] = useState<number>(18.554175348771114);
     const [long, setLongitude] = useState<number>(73.77817977625274);
     const [userMarker, setUserMarker] = useState<[number, number] | null>(null);
+    const [locationFetched, setLocationFetched] = useState<boolean>(false);
 
 
     useEffect(() => {
@@ -34,6 +35,7 @@ const Map = ({ place, radius }: MapProps) => {
             console.log('name', name);
             setLatitude(position.coords.latitude);
             setLongitude(position.coords.longitude);
+            setLocationFetched(true);
         }, (error) => {
             console.error("Geolocation error: ", error);
         });
@@ -80,10 +82,23 @@ const Map = ({ place, radius }: MapProps) => {
 
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-            {!place && (
+            {!place && locationFetched && (
                 <Marker position={[lat, long]}>
-                    {/* <Popup>MindBowser</Popup> */}
-                    <Tooltip>MindBowser</Tooltip>
+                    <Tooltip>
+                        <strong>
+                            My Location
+                        </strong>
+                    </Tooltip>
+                </Marker>
+            )}
+
+            {!place && !locationFetched && (
+                <Marker position={[lat, long]}>
+                    <Tooltip>
+                        <strong>
+                            Mindbowser
+                        </strong>
+                    </Tooltip>
                 </Marker>
             )}
 
@@ -93,11 +108,6 @@ const Map = ({ place, radius }: MapProps) => {
                     position={[loc.latitude, loc.longitude]}
                     icon={customIcon}
                 >
-                    {/* <Popup className="bg-green-300">
-                        <strong>
-                            {loc.name}
-                        </strong>
-                    </Popup> */}
                     <Tooltip>
                         <strong className="font-bold">{loc.name}</strong>
                     </Tooltip>
@@ -106,7 +116,6 @@ const Map = ({ place, radius }: MapProps) => {
 
             {place && (
                 <Marker position={[place.latitude, place.longitude]}>
-                    {/* <Popup>{place.name}</Popup> */}
                     <Tooltip>{place.name}</Tooltip>
                 </Marker>
             )}
