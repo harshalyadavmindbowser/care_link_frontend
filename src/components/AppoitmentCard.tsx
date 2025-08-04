@@ -67,7 +67,7 @@ const AppointmentCard: React.FC<AppoitmentCardProps> = ({ date, time, personName
         patient_id,
         provider_id,
         hospital_id,
-        status: "cancelled",
+        status: "pending",
         rejection_reason: "Doctor unavailable",
       };
 

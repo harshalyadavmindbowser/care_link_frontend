@@ -45,8 +45,8 @@ const Appointment: React.FC = () => {
   return (
     <div className="fixed ms-40 w-400 mt-16 ">
       <>
-        <h2 className="text-4xl font-bold">Appoitments</h2>
-        <p className="mt-4 text-2xl">manage your upcoming and post appoitments</p>
+        <h2 className="text-4xl font-bold">Appointments</h2>
+        <p className="mt-4 text-2xl">Manage your upcoming and post appoitments</p>
       </>
       <section className="mt-4">
         <SearchBar className="bg-gray-200 w-[100px]" />
@@ -54,9 +54,9 @@ const Appointment: React.FC = () => {
       <section className="flex gap-6 p-3">
         <Button className={getFilterButtonClass(filter === "pending")} onClick={() => setFilter("pending")}>Pending</Button>
         <Button className={getFilterButtonClass(filter === "approved")} onClick={() => setFilter("approved")}>Approved</Button>
-        <Button className={getFilterButtonClass(filter === "cancelled")} onClick={() => setFilter("cancelled")}>Cancled</Button>
+        <Button className={getFilterButtonClass(filter === "cancelled")} onClick={() => setFilter("cancelled")}>Cancelled</Button>
       </section>
-      <div className="h-120 overflow-y-scroll">
+      <div className="h-120 overflow-y">
         <div className="h-120 overflow-y-scroll">
           {loading && appointments.length === 0 ? (
             <p>Loading...</p>
