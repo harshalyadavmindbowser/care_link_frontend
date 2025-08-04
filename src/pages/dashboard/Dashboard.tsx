@@ -20,6 +20,22 @@ const patientIno: Patient[] = [
     reason: "dummmmmmmmyyy reason",
     status: "pending",
   },
+    {
+    id: 2,
+    pname: "Jhon",
+    date: "2025-07-25",
+    time: "10 : AM",
+    reason: "This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32.",
+    status: "pending",
+  },
+   {
+    id: 3,
+    pname: "Jack",
+    date: "2025-07-25",
+    time: "10 : AM",
+    reason: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    status: "pending",
+  },
 ];
 
 
@@ -52,9 +68,9 @@ export default function Dashboard() {
 
     getAppointments();
   }, []);
-  // const appointmnetsToday = user?.total_job_posted || 0;
-  // const pendingRequests = user?.total_cand_hired || 0;
-  // const totalAppointments = user?.active_job_posts || 0;
+  const appointmnetsToday = '12' || 0;
+  const pendingRequests = 5 || 0;
+  const totalAppointments = 17|| 0;
 
   return (
     <div className="p-10 ml-60 mt-16 px-4ml-60 mr-60">
@@ -62,7 +78,7 @@ export default function Dashboard() {
       <p className="mb-6">Welcome back, {user?.full_name} </p>
 
       {/* dashboard card */}
-      {/* <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
         {[
           { label: "Appointments Today", value: appointmnetsToday },
           { label: "Pending Requests", value: pendingRequests },
@@ -76,7 +92,7 @@ export default function Dashboard() {
             <p className="text-3xl font-semibold">{item.value}</p>
           </div>
         ))}
-      </div> */}
+      </div>
 
       {/* tablee */}
       <p className="text-xl font-semibold mb-2">Recent Appointment Requests</p>
@@ -91,7 +107,7 @@ export default function Dashboard() {
               <th className="p-3">Status</th>
             </tr>
           </thead>
-          {/* <tbody>
+          <tbody>
             {patientIno.map((patient) => (
               <tr key={patient.id} className="border-b hover:bg-gray-100">
                 <td className="p-3">{patient.pname}</td>
@@ -101,8 +117,8 @@ export default function Dashboard() {
                 <td className="p-3">{patient.status}</td>
               </tr>
             ))}
-          </tbody> */}
-             <tbody>
+          </tbody>
+             {/* <tbody>
             {patients.length > 0 ? (
               patients.map((patient) => (
                 <tr key={patient.id} className="border-b hover:bg-gray-100">
@@ -120,7 +136,7 @@ export default function Dashboard() {
                 </td>
               </tr>
             )}
-          </tbody>
+          </tbody> */}
         </table>
       </div>
 
