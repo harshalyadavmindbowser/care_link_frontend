@@ -89,7 +89,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
          navigate("/hospitaldetails");
       } else {
-        navigate("/appointments");
+        navigate("/hospitals");
       }
     }
     setUser(user);
