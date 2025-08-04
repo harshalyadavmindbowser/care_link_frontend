@@ -5,11 +5,11 @@ import axiosInstance from "../utils/axios";
 interface HospitalResponse {
     hospital_name: string;
     hospital_address: string;
-    images: []
+    images: { images_url: string }[];
 }
 
 const useFetchData = () => {
-    const [hospitalData, setHospitalData] = useState<HospitalResponse | null>(null);
+    const [hospitalData, setHospitalData] = useState<HospitalResponse[] | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {

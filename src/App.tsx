@@ -10,6 +10,7 @@ import HospitalDetails from "./pages/hospitaldetails/HospitalDetails";
 import Profile from "./pages/profile/Profile";
 import PrivateRoute from "./routes/PrivateRoute";
 import HospitalsNearYou from "./pages/map/HospitalsNearYou";
+import PageNotFound from './pages/pagenotfound/PageNotFound';
 
 
 const AppWrapper: React.FC = () => {
@@ -44,6 +45,7 @@ const AppWrapper: React.FC = () => {
           <Route path="/hospitaldetails" element={<HospitalDetails />} />
           <Route path="/appointments" element={<Appointment />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="*" element={<PageNotFound />} />
           <Route path="/hospitals" element={<HospitalsNearYou />} />
         </Routes>
       </main>

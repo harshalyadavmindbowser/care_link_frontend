@@ -30,7 +30,7 @@ const Appointment: React.FC = () => {
     role === 'provider'
       ? appointmentsData?.appoinments?.doctorAppointments || []
       : appointmentsData?.appoinments?.patientAppointments || [];
-  console.log("appointmentsDataDoc status", appointments.filter(app => app.status))
+  // console.log("appointmentsDataDoc status", appointments.filter(app => app.status))
 
   const getFilterButtonClass = (active: boolean) => `
   relative border-none pb-1

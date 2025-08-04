@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 import type { Place } from "../api/place";
 import { search } from "../api/search";
 import SearchBar from "./SearchBar";
-import axios from "axios";
+import axiosInstance from "../utils/axios";
 
 interface LocationSearchProp {
     onPlaceClick: (place: Place) => void;
@@ -32,17 +32,14 @@ const LocationSearch = ({ onPlaceClick, onRadiusChange }: LocationSearchProp) =>
 
 
     const handleCategoryChange = async (category: string) => {
-        setSelectedCategories((prevSelectedCategories) => {
-            if (prevSelectedCategories.includes(category)) {
-                return prevSelectedCategories.filter((item) => item !== category);
-            } else {
-                return [...prevSelectedCategories, category];
-            }
-        });
+
+        const isSelected = selectedCategories.includes(category);
+        const updateCategories = isSelected ? selectedCategories.filter(item => item !== category) : [...selectedCategories, category]
+        setSelectedCategories(updateCategories);
 
         try {
-            const response = await axios.post('http://localhost:8080/hospitals/category', {
-                categoryNames: [...selectedCategories, category],
+            const response = await axiosInstance.post('/hospitals/category', {
+                categoryNames: updateCategories
             });
             console.log('Selected Categories Sent to Backend:', response.data);
         } catch (error) {
@@ -100,7 +97,6 @@ const LocationSearch = ({ onPlaceClick, onRadiusChange }: LocationSearchProp) =>
                                 type="checkbox"
                                 name="category"
                                 value="Cardiology"
-                                checked={selectedCategories.includes("Cardiology")}
                                 onChange={() => handleCategoryChange("Cardiology")}
                             /> Cardiology
                         </label>
@@ -111,7 +107,6 @@ const LocationSearch = ({ onPlaceClick, onRadiusChange }: LocationSearchProp) =>
                                 type="checkbox"
                                 name="category"
                                 value="Orthopedics"
-                                checked={selectedCategories.includes("Orthopedics")}
                                 onChange={() => handleCategoryChange("Orthopedics")}
                             /> Orthopedics
                         </label>
@@ -122,7 +117,6 @@ const LocationSearch = ({ onPlaceClick, onRadiusChange }: LocationSearchProp) =>
                                 type="checkbox"
                                 name="category"
                                 value="Pediatrics"
-                                checked={selectedCategories.includes("Pediatrics")}
                                 onChange={() => handleCategoryChange("Pediatrics")}
                             /> Pediatrics
                         </label>
@@ -133,7 +127,6 @@ const LocationSearch = ({ onPlaceClick, onRadiusChange }: LocationSearchProp) =>
                                 type="checkbox"
                                 name="category"
                                 value="Neurology"
-                                checked={selectedCategories.includes("Neurology")}
                                 onChange={() => handleCategoryChange("Neurology")}
                             /> Neurology
                         </label>
@@ -144,7 +137,6 @@ const LocationSearch = ({ onPlaceClick, onRadiusChange }: LocationSearchProp) =>
                                 type="checkbox"
                                 name="category"
                                 value="Dermatology"
-                                checked={selectedCategories.includes("Dermatology")}
                                 onChange={() => handleCategoryChange("Dermatology")}
                             /> Dermatology
                         </label>
