@@ -4,7 +4,6 @@ import Navbar from "./components/Navbar";
 import Appointment from "./pages/appointment/Appointment";
 import Login from "./pages/login/Login";
 import Dashboard from "./pages/dashboard/Dashboard";
-import Footer from "./components/Footer";
 import Register from "./pages/register/Register";
 import HospitalDetails from "./pages/hospitaldetails/HospitalDetails";
 import Profile from "./pages/profile/Profile";
@@ -50,7 +49,6 @@ const AppWrapper: React.FC = () => {
         </Routes>
       </main>
 
-      {!isLoginPage && <Footer />}
     </div>
   );
 };
