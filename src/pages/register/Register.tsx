@@ -10,7 +10,7 @@ const Register: React.FC = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState<File | null>(null);
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -22,55 +22,71 @@ const Register: React.FC = () => {
   const [hospitalName, setHospitalName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [description, setDescription] = useState("");
+
+  const handelFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files != null) {
+      setImage(e.target.files[0]);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
-   console.log("fjkdjbf djhh");
 
+    console.log("fjkdjbf djhh");
     e.preventDefault();
-   
-    if (location.pathname == "/patient") {
-      const payload = {
-        full_name: name,
-        email: email,
-        password: password,
-        role: "patient",
-        // image,
-        provider_status:false,
-        dob: dob,
-        gender: gender,
-        phone_no: phoneNumber,
-        address: address,
-        insurance_provider: insuranceProvider,
-        policy_no: policyNumber,
-      
-      };
-      console.log("payload", payload);
+    const formData = new FormData();
 
-      const response=await axiosInstance.post("/auth/signup", payload)
-      if(response){
-        alert("Patient register successfull")
-        navigate('/')
+    if (location.pathname == "/patient") {
+      formData.append("full_name", name)
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("role", "patient");
+      // formData.append("provider_status", "false");
+      formData.append("dob", dob);
+
+      formData.append("gender", gender);
+      formData.append("phone_no", phoneNumber);
+      formData.append("address", address);
+      formData.append("insurance_provider", insuranceProvider);
+      formData.append("policy_no", policyNumber);
+
+      if (image) {
+        formData.append("image", image);
       }
-    } else {
-      const payload = {
-       full_name: name,
-        email: email,
-        password: password,
-        role: "provider",
-        // image,
-         medical_specialty: medicalSpecialty,
-           provider_status:false,
-         license_no:  licenseNumber,
-         hospitals:  hospitalName,
-       phone_no: contactNumber,
-       description: description,
-      };
-      console.log("payload", payload);
-     const response= await axiosInstance.post("/auth/signup", payload);
-     if(response){
-      alert('Povider register successfull');
-      navigate('/')
-     }
-       
+      try {
+        const response = await axiosInstance.post("/auth/signup", formData);
+        if (response) {
+          alert('Povider register successfull');
+          navigate('/')
+        }
+      } catch (err) {
+        console.error("Error during registration:", err);
+      }
+    }
+    else {
+
+      formData.append("full_name", name);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("role", "provider");
+      formData.append("medical_specialty", medicalSpecialty);
+      // formData.append("provider_status", "false");
+      formData.append("license_no", licenseNumber);
+      formData.append("hospitals", hospitalName);
+      formData.append("phone_no", contactNumber);
+      formData.append("description", description);
+      if (image) {
+        formData.append("image", image);
+      }
+      try {
+        const response = await axiosInstance.post("/auth/signup", formData);
+        if (response) {
+          alert('Povider register successfull');
+          navigate('/')
+        }
+      } catch (err) {
+        console.error("Error during registration:", err);
+      }
+
     }
   };
   return (
@@ -261,7 +277,7 @@ const Register: React.FC = () => {
                   </label> */}
                   <input
                     type="text"
-                    id="policy_number"
+                    id="medical_specialty"
                     placeholder=" Medical specialty"
                     value={medicalSpecialty}
                     onChange={(e) => setMedicalSpecialty(e.target.value)}
@@ -307,7 +323,7 @@ const Register: React.FC = () => {
                 <div className="mb-4">
                   <input
                     type="text"
-                    id="policy_number"
+                    id="contact_number"
                     placeholder="Contact number"
                     value={contactNumber}
                     onChange={(e) => setContactNumber(e.target.value)}
@@ -339,8 +355,8 @@ const Register: React.FC = () => {
             <div className="relative flex justify-center ">
               <input
                 type="file"
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
+                accept="image/png, image/jpeg" //accept this files only
+                onChange={handelFileChange}
                 className="file:mr-4 file:rounded-full file:border-0 file:bg-violet-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-violet-700 hover:file:bg-violet-100 dark:file:bg-violet-600 dark:file:text-violet-100 dark:hover:file:bg-violet-500 pl-4"
               />
             </div>
