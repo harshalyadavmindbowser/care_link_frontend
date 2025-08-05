@@ -27,7 +27,7 @@ const useFetchData = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const { data: response } = await axiosInstance.get('/appointments/7b7e9406-40b9-4f5a-a637-f639b0c1f6c3');
+                const { data: response } = await axiosInstance.get('/appointments/d1f6adac-e123-4706-a31e-a4e5168fc898');
                 setAppointmentsData(response);
             } catch (error) {
                 console.error(error)

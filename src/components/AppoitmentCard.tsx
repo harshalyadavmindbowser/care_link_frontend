@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ImageCard from "./ImageCard";
 import Button from "./Button";
 import ReusableModal from "./Modal";
@@ -14,12 +14,34 @@ const AppointmentCard: React.FC<AppoitmentCardProps> = ({ date, time, personName
   const [modalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState<"approve" | "reject" | "rejectConfirmed" | null>(null);
   const [showTick, setShowTick] = useState(false);
-
+  const [patientId, setPatientId] = useState<string | null>(null);
+const [providerId, setProviderId] = useState<string | null>(null);
+const [hospitalId, setHospitalId] = useState<string | null>(null);
   const appointment_date = "2025-08-01";
   const appointment_time = "10:00";
-  const patient_id = "cf194c53-5c90-4a88-b625-ece5ef386bf5";
-  const provider_id = "cf194c53-5c90-4a88-b625-ece5ef386bf5";
-  const hospital_id = "f4021e29-fd22-47a6-8574-233cbdd60e90";
+
+
+   useEffect(() => {
+    const fetchIds = async () => {
+      try {
+        const [patientsRes, providersRes, hospitalsRes] = await Promise.all([
+          axiosInstance.get("/users?role=patient"),
+          axiosInstance.get("/users?role=provider"),
+          axiosInstance.get("/hospitals"),
+        ]);
+
+        setPatientId(patientsRes.data[0]?.id || null);
+        setProviderId(providersRes.data[0]?.id || null);
+        setHospitalId(hospitalsRes.data[0]?.id || null);
+      } catch (error) {
+        console.error("Error fetching dynamic IDs:", error);
+      }
+    };
+
+    fetchIds();
+  }, []);
+
+
 
   const handleApprove = () => {
     setModalType("approve");
@@ -32,15 +54,19 @@ const AppointmentCard: React.FC<AppoitmentCardProps> = ({ date, time, personName
     setModalOpen(true);
     setShowTick(false);
   };
+ const handleApproveConfirm = async () => {
+    if (!patientId || !providerId || !hospitalId) {
+      console.warn("IDs not loaded yet.");
+      return;
+    }
 
-  const handleApproveConfirm = async () => {
     try {
       const payload = {
         appointment_date,
         appointment_time,
-        patient_id,
-        provider_id,
-        hospital_id,
+        patient_id: patientId,
+        provider_id: providerId,
+        hospital_id: hospitalId,
         status: "approved",
       };
 
@@ -59,14 +85,20 @@ const AppointmentCard: React.FC<AppoitmentCardProps> = ({ date, time, personName
   };
 
 
-  const handleRejectConfirm = async () => {
+
+    const handleRejectConfirm = async () => {
+    if (!patientId || !providerId || !hospitalId) {
+      console.warn("IDs not loaded yet.");
+      return;
+    }
+
     try {
       const payload = {
         appointment_date,
         appointment_time,
-        patient_id,
-        provider_id,
-        hospital_id,
+        patient_id: patientId,
+        provider_id: providerId,
+        hospital_id: hospitalId,
         status: "cancelled",
         rejection_reason: "Doctor unavailable",
       };
@@ -83,6 +115,7 @@ const AppointmentCard: React.FC<AppoitmentCardProps> = ({ date, time, personName
       console.error("Error rejecting appointment:", error);
     }
   };
+
 
   return (
     <div className="flex mt-3 p-2" >
@@ -106,8 +139,22 @@ const AppointmentCard: React.FC<AppoitmentCardProps> = ({ date, time, personName
           {rejectionReason}
         </p>
         <div className="flex gap-2 mt-2">
-          <Button className="border-none hover:outline rounded-full bg-gray-200" onClick={handleApprove}>Approve</Button>
-          <Button className="border-none hover:outline rounded-full  bg-gray-200" onClick={handleReject}>Reject</Button>
+          <Button
+  className="border-none hover:outline rounded-full bg-gray-200"
+  onClick={handleApprove}
+  disabled={!patientId || !providerId || !hospitalId}
+>
+  Approve
+</Button>
+
+<Button
+  className="border-none hover:outline rounded-full bg-gray-200"
+  onClick={handleReject}
+  disabled={!patientId || !providerId || !hospitalId}
+>
+  Reject
+</Button>
+
         </div>
       </div>
       <div>

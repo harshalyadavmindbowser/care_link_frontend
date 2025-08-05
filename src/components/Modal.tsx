@@ -20,7 +20,7 @@ const ReusableModal: React.FC<ReusableModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-200/50">
+    <div className="fixed inset-0 z-500 flex items-center justify-center bg-gray-200/50">
 
       <div className="bg-white rounded-lg w-[600px] h-[300px] p-6 flex flex-col items-center justify-center text-center space-y-6 relative">
         <button
